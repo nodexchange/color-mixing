@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import PlayAgain from './PlayAgain';
+
+
 
 const ColorMixingBtn = props => (
   <button
-    className="colorBtn"
+    className={props.selected ? 'colorBtn active' : 'colorBtn'}
     style={{ backgroundColor: props.colorMixing }}
     onClick={() => props.onClick(props.colorMixing)}
   >
@@ -14,12 +17,6 @@ const MixedColor = props => (
     className = 'mixedColor'
     style={{ backgroundColor: props.mixedColor}} 
   >
-  </div>
-);
-
-const PlayAgain = props => (
-  <div>
-    <button onClick={props.onClick}>Play Again</button>
   </div>
 );
 
@@ -90,11 +87,12 @@ const setGame = () => {
       setChosenColors([]);
     }
   }
-  return { mixedColor, status, chosenColors, mixCheck, gameStatus, correctNum };
+  return { mixedColor, status, chosenColors, setChosenColors, mixCheck, gameStatus, correctNum };
 }
 
 const ColorGame = () => {
   const [gameId, setGameId] = useState(1);
+  const [chosenColour, setChosenColour] = useState(1);
   return <Game key={gameId} startNewGame={() => setGameId(gameId + 1)} />;
 }
 
@@ -103,13 +101,14 @@ const Game = props => {
     mixedColor,
     status,
     chosenColors,
+    setChosenColors,
     mixCheck,
     gameStatus,
     correctNum,
   } = setGame();
 
-  const onBtnClick = (chosenColor) => {
-    chosenColors.push(chosenColor);
+  const onBtnClick = (newColor) => {
+    setChosenColors([...chosenColors, newColor]);
     if (chosenColors.length >= 2) {
       mixCheck(chosenColors);
     }
@@ -123,13 +122,18 @@ const Game = props => {
             <MixedColor mixedColor={mixedColor} />
           </div>
           <div className="right">
-            {colorMixingArr.map((colorMixing, index) => (
-              <ColorMixingBtn
-                key={index}
-                colorMixing={colorMixing}
-                onClick={onBtnClick}
-              />
-            ))}
+            {colorMixingArr.map((colorMixing) => {
+              const selected = (chosenColors.indexOf(colorMixing) > -1);
+              console.log('selected', selected);
+              return (
+                <ColorMixingBtn
+                  key={`color-${colorMixing}`}
+                  selected={selected}
+                  colorMixing={colorMixing}
+                  onClick={onBtnClick}
+                />
+              )
+            })}
           </div>
         </div>
       ) : (

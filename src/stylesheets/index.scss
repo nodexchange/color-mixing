@@ -1,7 +1,6 @@
 h1 {
   color: blue;
 }
-
 .body {
   display: flex;
 }
@@ -19,10 +18,6 @@ h1 {
   border: thin solid #ddd;
 }
 
-.colorBtn {
-  transition: all 0.5s;
-}
-
 .colorBtn, .mixedColor {
   background-color: #eee;
   border: thin solid #ddd;
@@ -30,13 +25,4 @@ h1 {
   height: 45px;
   margin: 10px;
   font-size: 25px;
-  transform: scale(1);
 }
-
-.colorBtn.active {
-  border: 3px solid #ddd;
-  transform: scale(1.1);
-  margin-top: 0px;
-}
-
-/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,9 @@
+☐ dist
+☐ port .env
+☐ style -> jss -> sass
+☐ babelrc -> a11y
+☐ unit tests -> jest -> snapshot testing
+☐ comments -> JSDocs
+☐ components split
+☐ proptypes - default props.
+☐ SERVER dependencies
